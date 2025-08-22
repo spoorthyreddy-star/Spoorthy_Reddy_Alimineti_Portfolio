@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alimineti Spoorthy Reddy - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-tab {
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-tab:hover::before {
+            left: 100%;
+        }
+        
+        .nav-tab.active {
+            transform: scale(1.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            filter: brightness(1.2);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .skill-icon {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .skill-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .timeline-item {
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 11px;
+            top: 24px;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); }
+            50% { box-shadow: 0 4px 25px rgba(102, 126, 234, 0.7); }
+            100% { box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); }
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .hero-text {
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex-1"></div>
+                <div class="flex flex-wrap justify-center gap-2 py-4">
+
+                    <button onclick="showSection('home')" class="nav-tab px-3 py-2 rounded-full font-semibold transition-all duration-300 flex items-center gap-1 text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 active text-sm shadow-lg">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </button>
+                    <button onclick="showSection('about')" class="nav-tab px-3 py-2 rounded-full font-semibold transition-all duration-300 flex items-center gap-1 text-white bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-sm shadow-lg">
+                        <i class="fas fa-user"></i>
+                        <span>About</span>
+                    </button>
+                    <button onclick="showSection('education')" class="nav-tab px-3 py-2 rounded-full font-semibold transition-all duration-300 flex items-center gap-1 text-white bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 text-sm shadow-lg">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Education</span>
+                    </button>
+                    <button onclick="showSection('skills')" class="nav-tab px-3 py-2 rounded-full font-semibold transition-all duration-300 flex items-center gap-1 text-white bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-sm shadow-lg">
+                        <i class="fas fa-code"></i>
+                        <span>Skills</span>
+                    </button>
+                    <button onclick="showSection('experience')" class="nav-tab px-3 py-2 rounded-full font-semibold transition-all duration-300 flex items-center gap-1 text-white bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-sm shadow-lg">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Experience</span>
+                    </button>
+                    <button onclick="showSection('projects')" class="nav-tab px-3 py-2 rounded-full font-semibold transition-all duration-300 flex items-center gap-1 text-white bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-sm shadow-lg">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Projects</span>
+                    </button>
+                    <button onclick="showSection('certifications')" class="nav-tab px-3 py-2 rounded-full font-semibold transition-all duration-300 flex items-center gap-1 text-white bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-sm shadow-lg">
+                        <i class="fas fa-certificate"></i>
+                        <span>Certifications</span>
+                    </button>
+                    <button onclick="showSection('resume')" class="nav-tab px-3 py-2 rounded-full font-semibold transition-all duration-300 flex items-center gap-1 text-white bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-sm shadow-lg">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Resume</span>
+                    </button>
+                    <button onclick="showSection('contact')" class="nav-tab px-3 py-2 rounded-full font-semibold transition-all duration-300 flex items-center gap-1 text-white bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-sm shadow-lg">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact</span>
+                    </button>
+                </div>
+                <div class="flex-1"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section">
+        <div class="min-h-screen gradient-bg flex items-center justify-center relative overflow-hidden">
+            <!-- Animated Particles -->
+            <div class="absolute inset-0">
+                <div class="particle floating-animation" style="width: 6px; height: 6px; top: 20%; left: 10%; animation-delay: 0s;"></div>
+                <div class="particle floating-animation" style="width: 8px; height: 8px; top: 60%; left: 80%; animation-delay: 2s;"></div>
+                <div class="particle floating-animation" style="width: 4px; height: 4px; top: 80%; left: 20%; animation-delay: 4s;"></div>
+                <div class="particle floating-animation" style="width: 10px; height: 10px; top: 30%; left: 70%; animation-delay: 1s;"></div>
+                <div class="particle floating-animation" style="width: 5px; height: 5px; top: 70%; left: 50%; animation-delay: 3s;"></div>
+            </div>
+            
+            <div class="text-center text-white z-10 px-4 max-w-6xl mx-auto">
+                <div class="hero-text">
+                    <!-- Welcome Section -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-center mb-6">
+                            <span class="text-5xl mr-4">👋</span>
+                            <h2 class="text-3xl md:text-4xl font-bold">Welcome to My Portfolio</h2>
+                        </div>
+                        <p class="text-lg md:text-xl mb-8 opacity-90 leading-relaxed max-w-4xl mx-auto">
+                            Hi, I'm Spoorthy Reddy Alimineti, a passionate Software Developer & AI&ML, Data Science Enthusiast.
+                            I specialize in building scalable applications, intelligent systems, and data-driven solutions using modern technologies.
+                        </p>
+                    </div>
+                    
+                    <!-- What I Do Section -->
+                    <div class="glass-effect rounded-3xl p-8 mb-12 text-left max-w-5xl mx-auto">
+                        <div class="flex items-center justify-center mb-8">
+                            <span class="text-4xl mr-4">💻</span>
+                            <h3 class="text-2xl md:text-3xl font-bold">What I Do</h3>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <div class="bg-white/10 rounded-2xl p-6 border border-white/20">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fas fa-code text-white text-lg"></i>
+                                    </div>
+                                    <p class="text-base md:text-lg leading-relaxed">Develop full-stack applications with clean, user-focused design</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white/10 rounded-2xl p-6 border border-white/20">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fas fa-brain text-white text-lg"></i>
+                                    </div>
+                                    <p class="text-base md:text-lg leading-relaxed">Work on AI, Machine Learning, and Big Data Analytics projects</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white/10 rounded-2xl p-6 border border-white/20">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fas fa-chart-line text-white text-lg"></i>
+                                    </div>
+                                    <p class="text-base md:text-lg leading-relaxed">Create interactive dashboards & visualizations for insights</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white/10 rounded-2xl p-6 border border-white/20">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-teal-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fas fa-lightbulb text-white text-lg"></i>
+                                    </div>
+                                    <p class="text-base md:text-lg leading-relaxed">Solve real-world problems with innovative software solutions</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Goal Section -->
+                        <div class="bg-gradient-to-r from-white/20 to-white/10 rounded-2xl p-8 border border-white/30 mb-8">
+                            <div class="flex items-center justify-center mb-6">
+                                <span class="text-4xl mr-4">🚀</span>
+                                <h3 class="text-2xl md:text-3xl font-bold">Goal</h3>
+                            </div>
+                            <p class="text-lg md:text-xl text-center leading-relaxed font-medium">
+                                My mission is to leverage technology, data, and creativity to deliver impactful solutions that drive progress.
+                            </p>
+                        </div>
+                        
+                        <!-- Navigation Guide -->
+                        <div class="text-center bg-white/10 rounded-2xl p-6 border border-white/20">
+                            <div class="flex items-center justify-center mb-4">
+                                <span class="text-3xl mr-3">📂</span>
+                                <p class="text-lg md:text-xl font-semibold">
+                                    Navigate through this dashboard to explore my projects, skills, experience, and achievements.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dashboard Stats -->
+                <div class="dashboard-grid mb-12">
+                    <div class="stat-card">
+                        <div class="text-4xl font-bold mb-2">4.0</div>
+                        <div class="text-lg opacity-80">GPA</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="text-4xl font-bold mb-2">25+</div>
+                        <div class="text-lg opacity-80">Certifications</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="text-4xl font-bold mb-2">5+</div>
+                        <div class="text-lg opacity-80">Major Projects</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="text-4xl font-bold mb-2">15+</div>
+                        <div class="text-lg opacity-80">Technologies</div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <button onclick="window.open('https://www.linkedin.com/in/spoorthy-reddy-alimineti-6ba2a2270/', '_blank')"
+                       class="glass-effect text-white px-8 py-4 rounded-full font-semibold hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer hover:bg-white/20 active:scale-95">
+                        <i class="fab fa-linkedin text-xl"></i>LinkedIn
+                    </button>
+                    <button onclick="window.open('https://github.com/spoorthyreddy-star', '_blank')"
+                       class="glass-effect text-white px-8 py-4 rounded-full font-semibold hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer hover:bg-white/20 active:scale-95">
+                        <i class="fab fa-github text-xl"></i>GitHub
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section hidden">
+        <div class="min-h-screen bg-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl font-bold text-gray-800 mb-6">About Me</h2>
+                    <div class="w-32 h-2 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto rounded-full"></div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div class="space-y-8">
+                        <div class="bg-white rounded-3xl p-8 shadow-2xl card-hover border border-gray-200">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">🎓 Academic Excellence</h3>
+                            <p class="text-lg text-gray-600 leading-relaxed">
+                                Currently pursuing Master's in Computer and Information Sciences at the University of North Texas with a perfect 4.0 GPA. My academic journey reflects my dedication to excellence and continuous learning.
+                            </p>
+                        </div>
+                        <div class="bg-white rounded-3xl p-8 shadow-2xl card-hover border border-gray-200">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">💻 Technical Expertise</h3>
+                            <p class="text-lg text-gray-600 leading-relaxed">
+                                Specialized in full-stack development, data science, and AI/ML applications. I bridge the gap between complex data insights and user-friendly web applications.
+                            </p>
+                        </div>
+                        <div class="bg-white rounded-3xl p-8 shadow-2xl card-hover border border-gray-200">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">🚀 Innovation Focus</h3>
+                            <p class="text-lg text-gray-600 leading-relaxed">
+                                Passionate about leveraging cutting-edge technology to solve real-world problems and create meaningful impact in the tech industry.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="relative">
+                            <div class="w-96 h-96 bg-gradient-to-br from-purple-500 via-indigo-500 to-pink-500 rounded-full flex items-center justify-center shadow-2xl p-4">
+                                <div class="w-80 h-80 bg-white rounded-full overflow-hidden border-4 border-white shadow-inner">
+                                    <img src="https://drive.google.com/thumbnail?id=12Edw5XL77o_TbIWa2hoV2lE_iLUQlsRN&sz=w400" 
+                                         alt="Spoorthy Reddy Alimineti" 
+                                         class="w-full h-full object-cover rounded-full"
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <!-- Fallback if image fails to load -->
+                                    <div class="w-full h-full bg-gradient-to-br from-purple-100 to-indigo-100 rounded-full flex items-center justify-center" style="display: none;">
+                                        <div class="text-center">
+                                            <div class="w-32 h-32 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                                                <i class="fas fa-user-graduate text-5xl text-white"></i>
+                                            </div>
+                                            <h4 class="text-2xl font-bold text-gray-800 mb-2">Spoorthy Reddy</h4>
+                                            <p class="text-lg text-purple-600 font-semibold">Software Developer</p>
+                                            <p class="text-sm text-gray-600 mt-2">AI/ML Enthusiast</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute -top-4 -right-4 w-24 h-24 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-star text-white text-2xl"></i>
+                            </div>
+                            <div class="absolute -bottom-4 -left-4 w-20 h-20 bg-green-400 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-code text-white text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section hidden">
+        <div class="min-h-screen bg-gray-50 py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl font-bold text-gray-800 mb-6">Education Journey</h2>
+                    <div class="w-32 h-2 bg-gradient-to-r from-green-600 to-teal-600 mx-auto rounded-full"></div>
+                </div>
+                <div class="max-w-4xl mx-auto">
+                    <div class="timeline-item pl-16 pb-16">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-white rounded-3xl shadow-2xl p-10 card-hover border border-gray-200">
+                            <div class="flex items-center mb-6">
+                                <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-teal-500 rounded-full flex items-center justify-center mr-6">
+                                    <i class="fas fa-university text-3xl text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-3xl font-bold text-gray-800">University of North Texas</h3>
+                                    <p class="text-xl text-purple-600 font-semibold">Masters in Computer and Information Sciences</p>
+                                </div>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-6 text-gray-600 mb-6">
+                                <div class="bg-gray-50 rounded-2xl p-4">
+                                    <p class="text-lg"><strong>Duration:</strong> Aug 2024 – Present</p>
+                                    <p class="text-lg"><strong>GPA:</strong> 4.0/4.0</p>
+                                </div>
+                                <div class="bg-gray-50 rounded-2xl p-4">
+                                    <p class="text-lg"><strong>Location:</strong> Denton, Texas</p>
+                                    <p class="text-lg"><strong>Status:</strong> Currently Enrolled</p>
+                                </div>
+                            </div>
+                            <div class="bg-green-50 rounded-2xl p-4 border border-green-200">
+                                <h4 class="font-bold text-green-700 mb-2">Key Achievements:</h4>
+                                <ul class="text-green-600 space-y-1">
+                                    <li>• Perfect 4.0 GPA maintained</li>
+                                    <li>• Teaching Assistant for C++ Programming</li>
+                                    <li>• Advanced coursework in Software Engineering, AI/ML and Data Science</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item pl-16">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-white rounded-3xl shadow-2xl p-10 card-hover border border-gray-200">
+                            <div class="flex items-center mb-6">
+                                <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full flex items-center justify-center mr-6">
+                                    <i class="fas fa-graduation-cap text-3xl text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-3xl font-bold text-gray-800">Malla Reddy Engineering College For Women</h3>
+                                    <p class="text-xl text-purple-600 font-semibold">Bachelors in Computer Science and Engineering</p>
+                                </div>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-6 text-gray-600 mb-6">
+                                <div class="bg-gray-50 rounded-2xl p-4">
+                                    <p class="text-lg"><strong>Duration:</strong> Nov 2020 – May 2024</p>
+                                    <p class="text-lg"><strong>GPA:</strong> 3.96/4.0</p>
+                                </div>
+                                <div class="bg-gray-50 rounded-2xl p-4">
+                                    <p class="text-lg"><strong>Location:</strong> Hyderabad, India</p>
+                                    <p class="text-lg"><strong>Status:</strong> Graduated</p>
+                                </div>
+                            </div>
+                            <div class="bg-blue-50 rounded-2xl p-4 border border-blue-200">
+                                <h4 class="font-bold text-blue-700 mb-2">Key Achievements:</h4>
+                                <ul class="text-blue-600 space-y-1">
+                                    <li>• Graduated with distinction (3.96/4.0 GPA)</li>
+                                    <li>• Build and deployed ML models using Scikit-learn, TensorFlow & PyTorch.</li>
+                                    <li>• Proficient in Python, C, Java, C++, Data Structures and JavaScript for software engineering and data-driven applications.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section hidden">
+        <div class="min-h-screen bg-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl font-bold text-gray-800 mb-6">Technical Skills</h2>
+                    <div class="w-32 h-2 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <!-- Frontend Skills -->
+                    <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-palette text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800">Frontend Development</h3>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="skill-icon bg-orange-100 text-orange-600 px-4 py-3 rounded-xl text-center font-medium border border-orange-200">HTML5</div>
+                            <div class="skill-icon bg-blue-100 text-blue-600 px-4 py-3 rounded-xl text-center font-medium border border-blue-200">CSS3</div>
+                            <div class="skill-icon bg-yellow-100 text-yellow-600 px-4 py-3 rounded-xl text-center font-medium border border-yellow-200">JavaScript</div>
+                            <div class="skill-icon bg-blue-100 text-blue-600 px-4 py-3 rounded-xl text-center font-medium border border-blue-200">Tailwind CSS</div>
+                            <div class="skill-icon bg-cyan-100 text-cyan-600 px-4 py-3 rounded-xl text-center font-medium border border-cyan-200">React</div>
+                            <div class="skill-icon bg-red-100 text-red-600 px-4 py-3 rounded-xl text-center font-medium border border-red-200">Angular</div>
+                            <div class="skill-icon bg-green-100 text-green-600 px-4 py-3 rounded-xl text-center font-medium border border-green-200">Vite</div>
+                            <div class="skill-icon bg-gray-100 text-gray-600 px-4 py-3 rounded-xl text-center font-medium border border-gray-200">Next.js</div>
+                        </div>
+                    </div>
+
+                    <!-- Backend Skills -->
+                    <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-teal-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-server text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800">Backend Development</h3>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="skill-icon bg-green-100 text-green-600 px-4 py-3 rounded-xl text-center font-medium border border-green-200">Node.js</div>
+                            <div class="skill-icon bg-blue-100 text-blue-600 px-4 py-3 rounded-xl text-center font-medium border border-blue-200">Python</div>
+                            <div class="skill-icon bg-red-100 text-red-600 px-4 py-3 rounded-xl text-center font-medium border border-red-200">Java</div>
+                            <div class="skill-icon bg-purple-100 text-purple-600 px-4 py-3 rounded-xl text-center font-medium border border-purple-200">MongoDB</div>
+                            <div class="skill-icon bg-gray-100 text-gray-600 px-4 py-3 rounded-xl text-center font-medium border border-gray-200">Express.js</div>
+                            <div class="skill-icon bg-green-100 text-green-600 px-4 py-3 rounded-xl text-center font-medium border border-green-200">Django</div>
+                            <div class="skill-icon bg-red-100 text-red-600 px-4 py-3 rounded-xl text-center font-medium border border-red-200">Flask</div>
+                            <div class="skill-icon bg-green-100 text-green-600 px-4 py-3 rounded-xl text-center font-medium border border-green-200">Spring Boot</div>
+                        </div>
+                    </div>
+
+                    <!-- AI/ML Skills -->
+                    <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-brain text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800">AI & Machine Learning</h3>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="skill-icon bg-orange-100 text-orange-600 px-4 py-3 rounded-xl text-center font-medium border border-orange-200">TensorFlow</div>
+                            <div class="skill-icon bg-red-100 text-red-600 px-4 py-3 rounded-xl text-center font-medium border border-red-200">PyTorch</div>
+                            <div class="skill-icon bg-blue-100 text-blue-600 px-4 py-3 rounded-xl text-center font-medium border border-blue-200">Scikit-learn</div>
+                            <div class="skill-icon bg-red-100 text-red-600 px-4 py-3 rounded-xl text-center font-medium border border-red-200">Keras</div>
+                            <div class="skill-icon bg-purple-100 text-purple-600 px-4 py-3 rounded-xl text-center font-medium border border-purple-200">Deep Learning</div>
+                            <div class="skill-icon bg-teal-100 text-teal-600 px-4 py-3 rounded-xl text-center font-medium border border-teal-200">NLP</div>
+                            <div class="skill-icon bg-orange-100 text-orange-600 px-4 py-3 rounded-xl text-center font-medium border border-orange-200">Reinforcement Learning</div>
+                            <div class="skill-icon bg-gray-100 text-gray-600 px-4 py-3 rounded-xl text-center font-medium border border-gray-200">OpenCV</div>
+                        </div>
+                    </div>
+
+                    <!-- Data Science Skills -->
+                    <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-chart-line text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800">Data Science</h3>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="skill-icon bg-orange-100 text-orange-600 px-4 py-3 rounded-xl text-center font-medium border border-orange-200">pandas</div>
+                            <div class="skill-icon bg-blue-100 text-blue-600 px-4 py-3 rounded-xl text-center font-medium border border-blue-200">NumPy</div>
+                            <div class="skill-icon bg-green-100 text-green-600 px-4 py-3 rounded-xl text-center font-medium border border-green-200">matplotlib</div>
+                            <div class="skill-icon bg-blue-100 text-blue-600 px-4 py-3 rounded-xl text-center font-medium border border-blue-200">Data Preprocessing</div>
+                            <div class="skill-icon bg-yellow-100 text-yellow-600 px-4 py-3 rounded-xl text-center font-medium border border-yellow-200">Power BI</div>
+                            <div class="skill-icon bg-blue-100 text-blue-600 px-4 py-3 rounded-xl text-center font-medium border border-blue-200">Tableau</div>
+                            <div class="skill-icon bg-yellow-100 text-yellow-600 px-4 py-3 rounded-xl text-center font-medium border border-yellow-200">Hadoop</div>
+                            <div class="skill-icon bg-orange-100 text-orange-600 px-4 py-3 rounded-xl text-center font-medium border border-orange-200">Spark</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section hidden">
+        <div class="min-h-screen bg-gray-50 py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl font-bold text-gray-800 mb-6">Professional Experience</h2>
+                    <div class="w-32 h-2 bg-gradient-to-r from-indigo-600 to-blue-600 mx-auto rounded-full"></div>
+                </div>
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white rounded-3xl shadow-2xl p-12 card-hover border border-gray-200">
+                        <div class="flex items-center mb-8">
+                            <div class="w-24 h-24 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full flex items-center justify-center mr-6">
+                                <i class="fas fa-chalkboard-teacher text-3xl text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-3xl font-bold text-gray-800">Teaching Assistant</h3>
+                                <p class="text-xl text-purple-600 font-semibold">University of North Texas</p>
+                                <p class="text-lg text-gray-500">Jan 2025 – Present</p>
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="space-y-6">
+                                <div class="bg-indigo-50 rounded-2xl p-6 border border-indigo-200">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-indigo-500 mt-1 mr-4 text-xl"></i>
+                                        <p class="text-gray-700 text-lg">Delivered comprehensive C++ programming content to graduate students</p>
+                                    </div>
+                                </div>
+                                <div class="bg-blue-50 rounded-2xl p-6 border border-blue-200">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-500 mt-1 mr-4 text-xl"></i>
+                                        <p class="text-gray-700 text-lg">Graded assignments with detailed feedback maintaining high standards</p>
+                                    </div>
+                                </div>
+                                <div class="bg-purple-50 rounded-2xl p-6 border border-purple-200">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-purple-500 mt-1 mr-4 text-xl"></i>
+                                        <p class="text-gray-700 text-lg">Created supplementary teaching materials and resources</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-6">
+                                <div class="bg-green-50 rounded-2xl p-6 border border-green-200">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-4 text-xl"></i>
+                                        <p class="text-gray-700 text-lg">Provided one-on-one support during office hours</p>
+                                    </div>
+                                </div>
+                                <div class="bg-teal-50 rounded-2xl p-6 border border-teal-200">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-teal-500 mt-1 mr-4 text-xl"></i>
+                                        <p class="text-gray-700 text-lg">Collaborated with professors to improve course engagement</p>
+                                    </div>
+                                </div>
+                                <div class="bg-orange-50 rounded-2xl p-6 border border-orange-200">
+                                    <h4 class="font-bold text-orange-600 mb-2">Impact Metrics:</h4>
+                                    <ul class="text-orange-500 space-y-1">
+                                        <li>• 95% student satisfaction rate</li>
+                                        <li>• Improved class performance by 20%</li>
+                                        <li>• Mentored 200+ graduate students</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section hidden">
+        <div class="min-h-screen bg-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl font-bold text-gray-800 mb-6">Featured Projects</h2>
+                    <div class="w-32 h-2 bg-gradient-to-r from-teal-600 to-cyan-600 mx-auto rounded-full"></div>
+                </div>
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden card-hover border border-gray-200">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 h-56 flex items-center justify-center relative">
+                            <i class="fas fa-file-alt text-8xl text-white"></i>
+                            <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm font-semibold">
+                                2025
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Resume-Lens</h3>
+                            <p class="text-gray-600 mb-6">AI-powered resume analysis platform with intelligent skill gap analysis and job matching capabilities.</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium border border-blue-200">React</span>
+                                <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-medium border border-green-200">Supabase</span>
+                                <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-medium border border-purple-200">OpenAI</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-500 mb-6">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                    <span>Resume parsing & analysis</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                    <span>AI-based skill gap identification</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                    <span>Intelligent job matching</span>
+                                </div>
+                            </div>
+                            <a href="https://github.com/spoorthyreddy-star/Resume_Lens-Resume-Analyzer-and-Visualizer" target="_blank" rel="noopener noreferrer"
+                               class="inline-flex items-center justify-center w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+                                <i class="fab fa-github mr-2 text-lg"></i>View on GitHub
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden card-hover border border-gray-200">
+                        <div class="bg-gradient-to-r from-yellow-500 to-red-600 h-56 flex items-center justify-center relative">
+                            <i class="fas fa-bolt text-8xl text-white"></i>
+                            <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm font-semibold">
+                                2022
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Electricity Theft Detection</h3>
+                            <p class="text-gray-600 mb-6">Advanced ML system for detecting electricity theft using hybrid CNN and Random Forest models.</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium border border-blue-200">Python</span>
+                                <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium border border-orange-200">TensorFlow</span>
+                                <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-medium border border-purple-200">CNN</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-500 mb-6">
+                                <div class="flex items-center">
+                                    <i class="fas fa-trophy text-yellow-500 mr-2"></i>
+                                    <span>100% accuracy achieved</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                    <span>Hybrid CNN + Random Forest</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                    <span>Real-time anomaly detection</span>
+                                </div>
+                            </div>
+                            <a href="https://github.com/spoorthyreddy-star/Electricity-Theft-Detection-in-Smart-Grids-Based-on-Deep-Neural-Networks" target="_blank" rel="noopener noreferrer"
+                               class="inline-flex items-center justify-center w-full bg-gradient-to-r from-yellow-500 to-red-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-yellow-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+                                <i class="fab fa-github mr-2 text-lg"></i>View on GitHub
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden card-hover border border-gray-200">
+                        <div class="bg-gradient-to-r from-green-500 to-teal-600 h-56 flex items-center justify-center relative">
+                            <i class="fas fa-network-wired text-8xl text-white"></i>
+                            <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm font-semibold">
+                                2024
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Network Traffic Classification</h3>
+                            <p class="text-gray-600 mb-6">Deep learning solution for classifying encrypted network traffic with high accuracy.</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium border border-blue-200">Python</span>
+                                <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-medium border border-red-200">Deep Learning</span>
+                                <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-medium border border-green-200">GUI</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-500 mb-6">
+                                <div class="flex items-center">
+                                    <i class="fas fa-trophy text-yellow-500 mr-2"></i>
+                                    <span>~98% classification accuracy</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                    <span>CNN and NIN architectures</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                    <span>User-friendly interface</span>
+                                </div>
+                            </div>
+                            <a href="https://github.com/spoorthyreddy-star/Advanced-Parallelized-Neural-Architecture-for-Precise-Encrypted-Network-Traffic" target="_blank" rel="noopener noreferrer"
+                               class="inline-flex items-center justify-center w-full bg-gradient-to-r from-green-500 to-teal-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-green-600 hover:to-teal-700 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+                                <i class="fab fa-github mr-2 text-lg"></i>View on GitHub
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 - YSL React Project -->
+                    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden card-hover border border-gray-200">
+                        <div class="bg-gradient-to-r from-cyan-500 to-blue-600 h-56 flex items-center justify-center relative">
+                            <i class="fab fa-react text-8xl text-white"></i>
+                            <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm font-semibold">
+                                2025
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">YSL React Application</h3>
+                            <p class="text-gray-600 mb-6">Modern React.js web application showcasing component-based architecture and responsive design.</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-cyan-100 text-cyan-600 px-3 py-1 rounded-full text-sm font-medium border border-cyan-200">React.js</span>
+                                <span class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full text-sm font-medium border border-yellow-200">JavaScript</span>
+                                <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium border border-blue-200">CSS3</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-500 mb-6">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                    <span>Component-based architecture</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                    <span>Responsive web design</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                    <span>Modern UI/UX patterns</span>
+                                </div>
+                            </div>
+                            <a href="https://github.com/spoorthyreddy-star/YSL_Basic_React_JS_Project" target="_blank" rel="noopener noreferrer"
+                               class="inline-flex items-center justify-center w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+                                <i class="fab fa-github mr-2 text-lg"></i>View on GitHub
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 - Heart Disease Prediction -->
+                    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden card-hover border border-gray-200">
+                        <div class="bg-gradient-to-r from-red-500 to-pink-600 h-56 flex items-center justify-center relative">
+                            <i class="fas fa-heartbeat text-8xl text-white"></i>
+                            <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm font-semibold">
+                                2025
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Heart Disease Prediction</h3>
+                            <p class="text-gray-600 mb-6">Big data analytics solution for heart disease visualization and prediction using machine learning algorithms.</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium border border-blue-200">Python</span>
+                                <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium border border-orange-200">Pandas</span>
+                                <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-medium border border-green-200">Scikit-learn</span>
+                                <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-medium border border-purple-200">Matplotlib</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-500 mb-6">
+                                <div class="flex items-center">
+                                    <i class="fas fa-trophy text-yellow-500 mr-2"></i>
+                                    <span>95%+ prediction accuracy</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                    <span>Interactive data visualizations</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                    <span>Multiple ML algorithms comparison</span>
+                                </div>
+                            </div>
+                            <a href="https://github.com/spoorthyreddy-star/Visualization-and-Prediction-of-Heart-Disease-using-Big-Data-Analytics" target="_blank" rel="noopener noreferrer"
+                               class="inline-flex items-center justify-center w-full bg-gradient-to-r from-red-500 to-pink-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-red-600 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+                                <i class="fab fa-github mr-2 text-lg"></i>View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="section hidden">
+        <div class="min-h-screen bg-gray-50 py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl font-bold text-gray-800 mb-6">Certifications & Achievements</h2>
+                    <div class="w-32 h-2 bg-gradient-to-r from-orange-600 to-yellow-600 mx-auto rounded-full"></div>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Meta Certifications -->
+                    <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fab fa-meta text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">Meta Certifications</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-blue-50 rounded-xl p-3 text-blue-600 font-medium border border-blue-200">Front-End Developer</div>
+                            <div class="bg-blue-50 rounded-xl p-3 text-blue-600 font-medium border border-blue-200">Back-End Developer</div>
+                            <div class="bg-blue-50 rounded-xl p-3 text-blue-600 font-medium border border-blue-200">React Developer</div>
+                            <div class="bg-blue-50 rounded-xl p-3 text-blue-600 font-medium border border-blue-200">Database Engineer</div>
+                            <div class="bg-blue-50 rounded-xl p-3 text-blue-600 font-medium border border-blue-200">Advanced React</div>
+                        </div>
+                    </div>
+
+                    <!-- IBM Certifications -->
+                    <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-laptop-code text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">IBM Certifications</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-cyan-50 rounded-xl p-3 text-cyan-600 font-medium border border-cyan-200">Data Analytics Professional</div>
+                            <div class="bg-cyan-50 rounded-xl p-3 text-cyan-600 font-medium border border-cyan-200">Python for AI & Development</div>
+                            <div class="bg-cyan-50 rounded-xl p-3 text-cyan-600 font-medium border border-cyan-200">Exploratory Data Analysis</div>
+                            <div class="bg-cyan-50 rounded-xl p-3 text-cyan-600 font-medium border border-cyan-200">Data Science Fundamentals</div>
+                        </div>
+                    </div>
+
+                    <!-- Google Certifications -->
+                    <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-red-400 to-pink-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fab fa-google text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">Google Certifications</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-red-50 rounded-xl p-3 text-red-600 font-medium border border-red-200">Data Analytics Foundations</div>
+                            <div class="bg-red-50 rounded-xl p-3 text-red-600 font-medium border border-red-200">Advanced Data Analytics</div>
+                            <div class="bg-red-50 rounded-xl p-3 text-red-600 font-medium border border-red-200">Business Intelligence</div>
+                        </div>
+                    </div>
+
+                    <!-- DeepLearning.AI -->
+                    <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-brain text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">DeepLearning.AI</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-purple-50 rounded-xl p-3 text-purple-600 font-medium border border-purple-200">AI For Everyone</div>
+                            <div class="bg-purple-50 rounded-xl p-3 text-purple-600 font-medium border border-purple-200">Machine Learning Specialization</div>
+                            <div class="bg-purple-50 rounded-xl p-3 text-purple-600 font-medium border border-purple-200">Deep Learning Fundamentals</div>
+                        </div>
+                    </div>
+
+                    <!-- University Programs -->
+                    <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-teal-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-university text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">University Programs</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-green-50 rounded-xl p-3 text-green-600 font-medium border border-green-200">Michigan: Python Programming</div>
+                            <div class="bg-green-50 rounded-xl p-3 text-green-600 font-medium border border-green-200">Colorado: Data Visualization</div>
+                            <div class="bg-green-50 rounded-xl p-3 text-green-600 font-medium border border-green-200">Duke: Web Development</div>
+                            <div class="bg-green-50 rounded-xl p-3 text-green-600 font-medium border border-green-200">Yonsei: Deep Learning</div>
+                        </div>
+                    </div>
+
+                    <!-- Forage Simulations -->
+                    <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-briefcase text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">Industry Simulations</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-orange-50 rounded-xl p-3 text-orange-600 font-medium border border-orange-200">Tata Data Visualization</div>
+                            <div class="bg-orange-50 rounded-xl p-3 text-orange-600 font-medium border border-orange-200">BCG GenAI Simulation</div>
+                            <div class="bg-orange-50 rounded-xl p-3 text-orange-600 font-medium border border-orange-200">Industry Experience</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="section hidden">
+        <div class="min-h-screen bg-white py-20">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
+                    <!-- Resume Header -->
+                    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-12 text-center">
+                        <h1 class="text-5xl font-bold mb-4">ALIMINETI SPOORTHY REDDY</h1>
+                        <p class="text-2xl mb-6 opacity-90">Full-Stack Developer | Data Scientist | AI/ML Enthusiast</p>
+                        <div class="flex flex-wrap justify-center gap-6 text-lg">
+                            <a href="https://www.linkedin.com/in/spoorthy-reddy-alimineti-6ba2a2270/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-gray-200 transition-colors duration-300">
+                                <i class="fab fa-linkedin"></i>
+                                <span>LinkedIn Profile</span>
+                            </a>
+                            <a href="https://github.com/spoorthyreddy-star" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-gray-200 transition-colors duration-300">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub Portfolio</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Resume Content -->
+                    <div class="p-12 space-y-12">
+                        <!-- Education Section -->
+                        <section>
+                            <h2 class="text-3xl font-bold text-gray-800 mb-8 border-b-4 border-purple-500 pb-2">EDUCATION</h2>
+                            <div class="space-y-8">
+                                <div class="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl p-8 border border-purple-200">
+                                    <div class="flex justify-between items-start mb-4">
+                                        <div>
+                                            <h3 class="text-2xl font-bold text-gray-800">University of North Texas</h3>
+                                            <p class="text-xl text-purple-600 font-semibold">Master's in Computer and Information Sciences</p>
+                                            <p class="text-gray-600">Denton, Texas</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <p class="text-lg font-semibold text-gray-800">Aug 2024 – Present</p>
+                                            <p class="text-2xl font-bold text-green-600">GPA: 4.0/4.0</p>
+                                        </div>
+                                    </div>
+                                    <ul class="text-gray-700 space-y-2">
+                                        <li>• Perfect academic record maintained</li>
+                                        <li>• Teaching Assistant for C++ Programming</li>
+                                        <li>• Advanced coursework in Software Engineering, AI/ML and Data Science</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-8 border border-blue-200">
+                                    <div class="flex justify-between items-start mb-4">
+                                        <div>
+                                            <h3 class="text-2xl font-bold text-gray-800">Malla Reddy Engineering College For Women</h3>
+                                            <p class="text-xl text-blue-600 font-semibold">Bachelor's in Computer Science and Engineering</p>
+                                            <p class="text-gray-600">Hyderabad, India</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <p class="text-lg font-semibold text-gray-800">Nov 2020 – May 2024</p>
+                                            <p class="text-2xl font-bold text-green-600">GPA: 3.96/4.0</p>
+                                        </div>
+                                    </div>
+                                    <ul class="text-gray-700 space-y-2">
+                                        <li>• Graduated with distinction </li>
+                                        <li>• Build and deployed ML models using Scikit-learn, TensorFlow & PyTorch.</li>
+                                        <li>• Proficient in Python, C, Java, C++, Data Structures and JavaScript for software engineering and data-driven applications.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Experience Section -->
+                        <section>
+                            <h2 class="text-3xl font-bold text-gray-800 mb-8 border-b-4 border-green-500 pb-2">PROFESSIONAL EXPERIENCE</h2>
+                            <div class="bg-gradient-to-r from-green-50 to-teal-50 rounded-2xl p-8 border border-green-200">
+                                <div class="flex justify-between items-start mb-6">
+                                    <div>
+                                        <h3 class="text-2xl font-bold text-gray-800">Teaching Assistant</h3>
+                                        <p class="text-xl text-green-600 font-semibold">University of North Texas</p>
+                                        <p class="text-gray-600">Denton, Texas</p>
+                                    </div>
+                                    <p class="text-lg font-semibold text-gray-800">Jan 2025 – Present</p>
+                                </div>
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3">Key Responsibilities:</h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li>• Delivered comprehensive C++ programming content</li>
+                                            <li>• Graded assignments with detailed feedback</li>
+                                            <li>• Created supplementary teaching materials</li>
+                                            <li>• Provided one-on-one student support</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3">Achievements:</h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li>• 95% student satisfaction rate</li>
+                                            <li>• Improved class performance by 20%</li>
+                                            <li>• Mentored 50+ graduate students</li>
+                                            <li>• Collaborated with professors effectively</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Technical Skills Section -->
+                        <section>
+                            <h2 class="text-3xl font-bold text-gray-800 mb-8 border-b-4 border-purple-500 pb-2">TECHNICAL SKILLS</h2>
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div class="bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl p-6 border border-orange-200">
+                                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                                        <i class="fas fa-palette text-orange-500 mr-3"></i>Frontend Development
+                                    </h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm border border-orange-200">HTML5</span>
+                                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm border border-blue-200">CSS3</span>
+                                        <span class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full text-sm border border-yellow-200">JavaScript</span>
+                                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm border border-blue-200">Tailwind CSS</span>
+                                        <span class="bg-cyan-100 text-cyan-600 px-3 py-1 rounded-full text-sm border border-cyan-200">React</span>
+                                        <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm border border-red-200">Angular</span>
+                                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm border border-green-200">Vite</span>
+                                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm border border-gray-200">Next.js</span>
+                                    </div>
+                                </div>
+
+                                <div class="bg-gradient-to-r from-green-50 to-teal-50 rounded-2xl p-6 border border-green-200">
+                                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                                        <i class="fas fa-server text-green-500 mr-3"></i>Backend Development
+                                    </h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm border border-green-200">Node.js</span>
+                                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm border border-blue-200">Python</span>
+                                        <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm border border-red-200">Java</span>
+                                        <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm border border-purple-200">MongoDB</span>
+                                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm border border-gray-200">Express.js</span>
+                                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm border border-green-200">Django</span>
+                                        <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm border border-red-200">Flask</span>
+                                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm border border-green-200">Spring Boot</span>
+                                    </div>
+                                </div>
+
+                                <div class="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl p-6 border border-purple-200">
+                                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                                        <i class="fas fa-brain text-purple-500 mr-3"></i>AI & Machine Learning
+                                    </h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm border border-orange-200">TensorFlow</span>
+                                        <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm border border-red-200">PyTorch</span>
+                                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm border border-blue-200">Scikit-learn</span>
+                                        <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm border border-red-200">Keras</span>
+                                        <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm border border-purple-200">Deep Learning</span>
+                                        <span class="bg-teal-100 text-teal-600 px-3 py-1 rounded-full text-sm border border-teal-200">NLP</span>
+                                        <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm border border-orange-200">Reinforcement Learning</span>
+                                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm border border-gray-200">OpenCV</span>
+                                    </div>
+                                </div>
+
+                                <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-6 border border-blue-200">
+                                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                                        <i class="fas fa-chart-line text-blue-500 mr-3"></i>Data Science
+                                    </h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm border border-orange-200">pandas</span>
+                                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm border border-blue-200">NumPy</span>
+                                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm border border-green-200">matplotlib</span>
+                                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm border border-blue-200">Data Preprocessing</span>
+                                        <span class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full text-sm border border-yellow-200">Power BI</span>
+                                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm border border-blue-200">Tableau</span>
+                                        <span class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full text-sm border border-yellow-200">Hadoop</span>
+                                        <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm border border-orange-200">Spark</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Projects Section -->
+                        <section>
+                            <h2 class="text-3xl font-bold text-gray-800 mb-8 border-b-4 border-teal-500 pb-2">MAJOR PROJECTS</h2>
+                            <div class="space-y-6">
+                                <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 border border-blue-200">
+                                    <div class="flex justify-between items-start mb-4">
+                                        <h3 class="text-xl font-bold text-gray-800">Resume-Lens</h3>
+                                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-semibold border border-blue-200">2025</span>
+                                    </div>
+                                    <p class="text-gray-700 mb-3">AI-powered resume analysis platform with intelligent skill gap analysis and job matching capabilities.</p>
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        <span class="bg-cyan-100 text-cyan-600 px-2 py-1 rounded text-sm border border-cyan-200">React</span>
+                                        <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-sm border border-green-200">Supabase</span>
+                                        <span class="bg-purple-100 text-purple-600 px-2 py-1 rounded text-sm border border-purple-200">OpenAI</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500">GitHub: Resume_Lens-Resume-Analyzer-and-Visualizer</p>
+                                </div>
+
+                                <div class="bg-gradient-to-r from-yellow-50 to-red-50 rounded-2xl p-6 border border-yellow-200">
+                                    <div class="flex justify-between items-start mb-4">
+                                        <h3 class="text-xl font-bold text-gray-800">Electricity Theft Detection</h3>
+                                        <span class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full text-sm font-semibold border border-yellow-200">2022</span>
+                                    </div>
+                                    <p class="text-gray-700 mb-3">Advanced ML system using hybrid CNN and Random Forest models. Achieved 100% accuracy.</p>
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-sm border border-blue-200">Python</span>
+                                        <span class="bg-orange-100 text-orange-600 px-2 py-1 rounded text-sm border border-orange-200">TensorFlow</span>
+                                        <span class="bg-purple-100 text-purple-600 px-2 py-1 rounded text-sm border border-purple-200">CNN</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500">GitHub: Electricity-Theft-Detection-in-Smart-Grids-Based-on-Deep-Neural-Networks</p>
+                                </div>
+
+                                <div class="bg-gradient-to-r from-green-50 to-teal-50 rounded-2xl p-6 border border-green-200">
+                                    <div class="flex justify-between items-start mb-4">
+                                        <h3 class="text-xl font-bold text-gray-800">Network Traffic Classification</h3>
+                                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-semibold border border-green-200">2024</span>
+                                    </div>
+                                    <p class="text-gray-700 mb-3">Deep learning solution for encrypted network traffic classification. ~98% accuracy achieved.</p>
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-sm border border-blue-200">Python</span>
+                                        <span class="bg-red-100 text-red-600 px-2 py-1 rounded text-sm border border-red-200">Deep Learning</span>
+                                        <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-sm border border-green-200">GUI</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500">GitHub: Advanced-Parallelized-Neural-Architecture-for-Precise-Encrypted-Network-Traffic</p>
+                                </div>
+
+                                <div class="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-2xl p-6 border border-cyan-200">
+                                    <div class="flex justify-between items-start mb-4">
+                                        <h3 class="text-xl font-bold text-gray-800">Heart Disease Prediction</h3>
+                                        <span class="bg-cyan-100 text-cyan-600 px-3 py-1 rounded-full text-sm font-semibold border border-cyan-200">2025</span>
+                                    </div>
+                                    <p class="text-gray-700 mb-3">Big data analytics solution with interactive visualizations. 95%+ prediction accuracy.</p>
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-sm border border-blue-200">Python</span>
+                                        <span class="bg-orange-100 text-orange-600 px-2 py-1 rounded text-sm border border-orange-200">Pandas</span>
+                                        <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-sm border border-green-200">Scikit-learn</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500">GitHub: Visualization-and-Prediction-of-Heart-Disease-using-Big-Data-Analytics</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Certifications Section -->
+                        <section>
+                            <h2 class="text-3xl font-bold text-gray-800 mb-8 border-b-4 border-orange-500 pb-2">CERTIFICATIONS (25+ Total)</h2>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-200">
+                                    <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                                        <i class="fab fa-meta text-blue-500 mr-3"></i>Meta Certifications
+                                    </h3>
+                                    <ul class="text-gray-700 space-y-1 text-sm">
+                                        <li>• Front-End Developer</li>
+                                        <li>• Back-End Developer</li>
+                                        <li>• React Developer</li>
+                                        <li>• Database Engineer</li>
+                                        <li>• Advanced React</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-2xl p-6 border border-cyan-200">
+                                    <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                                        <i class="fas fa-laptop-code text-cyan-500 mr-3"></i>IBM Certifications
+                                    </h3>
+                                    <ul class="text-gray-700 space-y-1 text-sm">
+                                        <li>• Data Analytics Professional</li>
+                                        <li>• Python for AI & Development</li>
+                                        <li>• Exploratory Data Analysis</li>
+                                        <li>• Data Science Fundamentals</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-gradient-to-r from-red-50 to-pink-50 rounded-2xl p-6 border border-red-200">
+                                    <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                                        <i class="fab fa-google text-red-500 mr-3"></i>Google Certifications
+                                    </h3>
+                                    <ul class="text-gray-700 space-y-1 text-sm">
+                                        <li>• Data Analytics Foundations</li>
+                                        <li>• Advanced Data Analytics</li>
+                                        <li>• Business Intelligence</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl p-6 border border-purple-200">
+                                    <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                                        <i class="fas fa-brain text-purple-500 mr-3"></i>DeepLearning.AI
+                                    </h3>
+                                    <ul class="text-gray-700 space-y-1 text-sm">
+                                        <li>• AI For Everyone</li>
+                                        <li>• Machine Learning Specialization</li>
+                                        <li>• Deep Learning Fundamentals</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Key Achievements -->
+                        <section>
+                            <h2 class="text-3xl font-bold text-gray-800 mb-8 border-b-4 border-yellow-500 pb-2">KEY ACHIEVEMENTS</h2>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-200">
+                                    <h3 class="text-lg font-bold text-gray-800 mb-4">Academic Excellence</h3>
+                                    <ul class="text-gray-700 space-y-2">
+                                        <li class="flex items-center"><i class="fas fa-trophy text-yellow-500 mr-2"></i>Perfect 4.0 GPA in Master's program</li>
+                                        <li class="flex items-center"><i class="fas fa-star text-yellow-500 mr-2"></i>3.96/4.0 GPA in Bachelor's degree</li>
+                                        <li class="flex items-center"><i class="fas fa-medal text-yellow-500 mr-2"></i>Graduated with distinction</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-6 border border-blue-200">
+                                    <h3 class="text-lg font-bold text-gray-800 mb-4">Professional Impact</h3>
+                                    <ul class="text-gray-700 space-y-2">
+                                        <li class="flex items-center"><i class="fas fa-users text-blue-500 mr-2"></i>Mentored 200+ graduate students</li>
+                                        <li class="flex items-center"><i class="fas fa-chart-line text-green-500 mr-2"></i>95% student satisfaction rate</li>
+                                        <li class="flex items-center"><i class="fas fa-arrow-up text-green-500 mr-2"></i>Improved class performance by 50%</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section hidden">
+        <div class="min-h-screen bg-gray-50 py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl font-bold text-gray-800 mb-6">Let's Connect</h2>
+                    <div class="w-32 h-2 bg-gradient-to-r from-pink-600 to-rose-600 mx-auto rounded-full"></div>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-16">
+                    <div class="space-y-8">
+                        <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover border border-gray-200">
+                            <h3 class="text-3xl font-bold text-gray-800 mb-6">Get In Touch</h3>
+                            <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                                I am always eager to explore new opportunities, collaborate on innovative projects, and engage in discussions on the latest advancements in technology and AI. I welcome connections to share insights, exchange ideas, and explore potential collaborations.
+                            </p>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-center p-4 bg-blue-50 rounded-2xl border border-blue-200">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full flex items-center justify-center mr-6">
+                                        <i class="fab fa-linkedin text-2xl text-white"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-800 text-lg">LinkedIn</p>
+                                        <a href="https://www.linkedin.com/in/spoorthy-reddy-alimineti-6ba2a2270/" target="_blank" 
+                                           class="text-blue-600 hover:text-blue-500 font-semibold">
+                                            Connect with me professionally
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center p-4 bg-gray-50 rounded-2xl border border-gray-200">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-gray-700 to-black rounded-full flex items-center justify-center mr-6">
+                                        <i class="fab fa-github text-2xl text-white"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-800 text-lg">GitHub</p>
+                                        <a href="https://github.com/spoorthyreddy-star" target="_blank" 
+                                           class="text-gray-600 hover:text-gray-500 font-semibold">
+                                            Explore my code repositories
+                                        </a>
+                                    </div>
+                                </div>
+                                
+
+                            </div>
+                        </div>
+                        
+                        <!-- Interactive Map -->
+                        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
+                            <div class="p-6 border-b border-gray-200">
+                                <h3 class="text-2xl font-bold text-gray-800 flex items-center">
+                                    <i class="fas fa-map-marked-alt text-green-500 mr-3"></i>
+                                    My Location
+                                </h3>
+                                <p class="text-gray-600 mt-2">University of North Texas, Denton, Texas</p>
+                            </div>
+                            <div class="h-80 relative">
+                                <iframe 
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3347.0234567890123!2d-97.1526!3d33.2148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c3c8b8b8b8b8b%3A0x8b8b8b8b8b8b8b8b!2sUniversity%20of%20North%20Texas%2C%20Denton%2C%20TX!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                                    width="100%" 
+                                    height="100%" 
+                                    style="border:0;" 
+                                    allowfullscreen="" 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                    class="rounded-b-3xl"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                </iframe>
+                                <!-- Fallback map display -->
+                                <div class="w-full h-full bg-gradient-to-br from-green-100 to-blue-100 rounded-b-3xl flex items-center justify-center" style="display: none;">
+                                    <div class="text-center">
+                                        <div class="w-24 h-24 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                            <i class="fas fa-map-marker-alt text-3xl text-white"></i>
+                                        </div>
+                                        <h4 class="text-2xl font-bold text-gray-800 mb-2">Denton, Texas</h4>
+                                        <p class="text-lg text-gray-600">University of North Texas</p>
+                                        <p class="text-sm text-gray-500 mt-2">33.2148° N, 97.1526° W</p>
+                                    </div>
+                                </div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none rounded-b-3xl"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover border border-gray-200">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Send a Message</h3>
+                        <form class="space-y-6" onsubmit="handleFormSubmit(event)">
+                            <div>
+                                <label for="name" class="block text-sm font-bold text-gray-700 mb-3">Your Name</label>
+                                <input type="text" id="name" name="name" required
+                                       class="w-full px-6 py-4 border-2 border-gray-300 bg-white text-gray-800 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 text-lg">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-bold text-gray-700 mb-3">Email Address</label>
+                                <input type="email" id="email" name="email" required
+                                       class="w-full px-6 py-4 border-2 border-gray-300 bg-white text-gray-800 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 text-lg">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-bold text-gray-700 mb-3">Your Message</label>
+                                <textarea id="message" name="message" rows="6" required
+                                          class="w-full px-6 py-4 border-2 border-gray-300 bg-white text-gray-800 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 text-lg resize-none"></textarea>
+                            </div>
+                            <button type="submit" 
+                                    class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-4 px-8 rounded-2xl font-bold text-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                                <i class="fas fa-paper-plane mr-2"></i>Send Message
+                            </button>
+                        </form>
+                        <div id="formMessage" class="mt-6 p-4 rounded-2xl hidden">
+                            <p class="text-center font-semibold"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Section switching functionality
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Remove active class from all nav tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName).classList.remove('hidden');
+            
+            // Add active class to clicked nav tab
+            if (event && event.target) {
+                event.target.classList.add('active');
+            } else {
+                // Find and activate the corresponding nav tab
+                const navButtons = document.querySelectorAll('.nav-tab');
+                navButtons.forEach(button => {
+                    if (button.onclick && button.onclick.toString().includes(sectionName)) {
+                        button.classList.add('active');
+                    }
+                });
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Form submission handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const formMessage = document.getElementById('formMessage');
+            const messageText = formMessage.querySelector('p');
+            
+            // Show success message
+            formMessage.classList.remove('hidden', 'bg-red-50', 'text-red-600', 'border-red-200');
+            formMessage.classList.add('bg-green-50', 'text-green-600', 'border', 'border-green-200');
+            messageText.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Thank you for your submission! I appreciate you reaching out and will get back to you soon.';
+            
+            // Reset form
+            event.target.reset();
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                formMessage.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Add smooth animations on load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate skill icons on hover
+            document.querySelectorAll('.skill-icon').forEach(icon => {
+                icon.addEventListener('mouseenter', () => {
+                    icon.style.transform = 'scale(1.1) rotate(5deg)';
+                });
+                
+                icon.addEventListener('mouseleave', () => {
+                    icon.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+        });
+
+        // Initialize page functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate skill icons on hover
+            document.querySelectorAll('.skill-icon').forEach(icon => {
+                icon.addEventListener('mouseenter', () => {
+                    icon.style.transform = 'scale(1.1) rotate(5deg)';
+                });
+                
+                icon.addEventListener('mouseleave', () => {
+                    icon.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+        });
+
+        // Add keyboard navigation for sections
+        document.addEventListener('keydown', (e) => {
+            if (e.key >= '1' && e.key <= '9') {
+                const sections = ['home', 'about', 'education', 'skills', 'experience', 'projects', 'certifications', 'resume', 'contact'];
+                const sectionIndex = parseInt(e.key) - 1;
+                if (sections[sectionIndex]) {
+                    showSection(sections[sectionIndex]);
+                    document.querySelector(`button[onclick="showSection('${sections[sectionIndex]}')"]`).classList.add('active');
+                }
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'973514eeb2696c10',t:'MTc1NTg5NDE0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
